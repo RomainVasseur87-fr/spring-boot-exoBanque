@@ -34,6 +34,31 @@ public class CompteController {
 		comptes.add(new Compte(400004, 3500));
 		return comptes;
 	}
+	
+	/**
+	 * controlleur permettant d'ajouter un montant au solde d'un compte
+	 * @param id du compte
+	 * @param unMontant à ajouter à ce compte
+	 * @return le compte qui a eu son solde augmenter d'unMontant
+	 */
+	@GetMapping("/{id}/solde/ajouter/{unMontant}") /// localhost:8080/comptes/{id du compte}/solde/ajouter/{unMontant}--->get
+	public Compte ajouterSolde(@PathVariable int id, @PathVariable double unMontant) {
+		Compte modifiedCompte = findById(id);
+		modifiedCompte.ajouter(unMontant);
+		return modifiedCompte;
+	}
+	/**
+	 * controlleur permettant de retirer un montant au solde d'un compte
+	 * @param id du compte
+	 * @param unMontant à retirer à ce compte
+	 * @return le compte qui a eu son solde diminuer d'unMontant
+	 */
+	@GetMapping("/{id}/solde/retirer/{unMontant}") /// localhost:8080/comptes/{id du compte}/solde/retirer/{unMontant}--->get
+	public Compte retirerSolde(@PathVariable int id, @PathVariable double unMontant) {
+		Compte modifiedCompte = findById(id);
+		modifiedCompte.retirer(unMontant);
+		return modifiedCompte;
+	}
 
 	/**
 	 * methode pour recuperer tout les comptes
